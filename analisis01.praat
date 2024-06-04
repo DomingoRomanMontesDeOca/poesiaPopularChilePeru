@@ -5,11 +5,30 @@ tono = selected("Pitch")
 tg = selected("TextGrid")
 
 writeInfoLine: "===="
+
 select tg
+
 
 tiempo_total_sin_silencios = Get total duration of intervals where: 1, "is not equal to", ""
 
 n_intervalos_tier_1 = Get number of intervals: 1
+
+tiempo_uni_1 = Get end time of interval: 1, 1
+
+tiempo_fin_1 = Get start time of interval: 1, n_intervalos_tier_1
+
+tiempo_total_con_pausas = tiempo_fin_1 - tiempo_uni_1
+
+
+velocidad_estrofa = 4 / tiempo_total_con_pausas
+
+velocidad_verso = 40 /  tiempo_total_con_pausas
+
+
+
+appendInfoLine: fixed$(tiempo_total_con_pausas,2),tab$, fixed$(tiempo_total_sin_silencios,2), tab$, fixed$(velocidad_estrofa,2),tab$,tab$,fixed$(velocidad_verso,2)
+
+
 
 if n_intervalos_tier_1 <> 9
 
@@ -50,4 +69,5 @@ for i to n_intervalos_tier_1
 	endif
 
 endfor
+
 
